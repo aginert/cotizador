@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 class Formulario extends Component {
 
-    // refs son para leer los valores de los campos de un formulario
+    // Refs son para leer los valores de los campos de un formulario. Por lo que tendrás que crear un valor para cada campo.
     marcaRef = React.createRef();
     yearRef = React.createRef();
     planBasicoRef = React.createRef();
@@ -11,31 +11,32 @@ class Formulario extends Component {
     cotizarSeguro = (e) =>  {
         e.preventDefault();
 
-        // leer el plan
+        //Obtener los datos.
+
+
+        //Leer el plan.
         const plan = this.planBasicoRef.current.checked ? 'basico' : 'completo';
 
-        // obtener los datos
-        // console.log(this.marcaRef.current.value);
-
-        // crear el objeto
-        const infoAuto = {
+        //Crear el objeto
+        const infoAuto={
             marca: this.marcaRef.current.value,
-            year: this.yearRef.current.value,
-            plan : plan
-        }
+            year:  this.yearRef.current.value,
+            plan:  plan
+        };
 
-        // console.log(infoAuto);
 
-        // enviarlo al componente principal
+        // Enviar la información al componente principal.
+
         this.props.cotizarSeguro(infoAuto);
 
-        // resetear el formulario (opcional)
-        // e.currentTarget.reset()
+        //Resetear Formulario.
+
+        e.currentTarget.reset();
     }
 
     render() {
         return (
-            <form className="cotizar-auto" onSubmit={this.cotizarSeguro} >
+            <form className="cotizar-auto" onSubmit={this.cotizarSeguro}>
                 <div className="campo">
                     <label>Marca</label>
                     <select name="marca" ref={this.marcaRef} >
@@ -48,6 +49,7 @@ class Formulario extends Component {
                 <div className="campo">
                     <label>Año</label>
                     <select name="year" ref={this.yearRef} >
+                        <option value="2018">2019</option>
                         <option value="2018">2018</option>
                         <option value="2017">2017</option>
                         <option value="2016">2016</option>
@@ -66,7 +68,6 @@ class Formulario extends Component {
                     <input type="radio" ref={this.planBasicoRef}  name="plan" value="basico"/> Básico
                     <input type="radio" ref={this.planCompletoRef}  name="plan" value="completo"/> Completo
                 </div>
-
                 <button type="submit" className="boton">Cotizar</button>
             </form>
         );
